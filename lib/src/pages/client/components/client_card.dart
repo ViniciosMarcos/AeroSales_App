@@ -1,5 +1,6 @@
 import 'package:aerosales_app/src/configs/custom_colors.dart';
 import 'package:aerosales_app/src/models/client_model.dart';
+import 'package:aerosales_app/src/pages/client/components/row_details_client.dart';
 import 'package:flutter/material.dart';
 
 class CardCliente extends StatelessWidget {
@@ -52,18 +53,30 @@ class CardCliente extends StatelessWidget {
           ),
         ),
         children: [
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Fantasia: ${cliente.fantasia}'),
+          RowDetailsClient(
+            textFirst: 'Fantasia',
+            textSecond: cliente.fantasia!,
           ),
-          Text('${cliente.cidade}'),
-          Row(
-            children: [
-              Text('${cliente.endereco}'),
-              Text('${cliente.bairro}'),
-            ],
+          RowDetailsClient(
+            textFirst: 'Cidade',
+            textSecond: cliente.cidade!,
           ),
-          Text(cliente.formatterPhoneNumber()),
+          RowDetailsClient(
+            textFirst: 'Bairro',
+            textSecond: cliente.bairro!,
+          ),
+          RowDetailsClient(
+            textFirst: 'Endereco',
+            textSecond: cliente.endereco!,
+          ),
+          RowDetailsClient(
+            textFirst: 'Núm.',
+            textSecond: cliente.numero!,
+          ),
+          RowDetailsClient(
+            textFirst: 'Contato',
+            textSecond: cliente.formatterPhoneNumber(),
+          ),
         ],
       ),
     );
