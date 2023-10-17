@@ -115,6 +115,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
                             if (result) {
                               Get.offAllNamed(PagesRoutes.homeTab);
+                            } else {
+                              utilsServices.showToast(
+                                msg: 'Login ou senha inválido, verifique!',
+                                isError: true,
+                              );
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -222,12 +227,22 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
             TextButton(
-              onPressed: () {
-                utilsServices.saveLocalData(
-                  key: StorageKeys.pathApi,
-                  data: parametroController.text,
-                );
-                SystemNavigator.pop();
+              onPressed: () async {
+                final result = await authController.validatePathApi(
+                    pathApi: parametroController.text);
+
+                if (result) {
+                  utilsServices.saveLocalData(
+                    key: StorageKeys.pathApi,
+                    data: parametroController.text,
+                  );
+                  SystemNavigator.pop();
+                } else {
+                  utilsServices.showToast(
+                    msg: 'Caminho inválido, verifique!',
+                    isError: true,
+                  );
+                }
               },
               child: const Text('Salvar'),
             ),

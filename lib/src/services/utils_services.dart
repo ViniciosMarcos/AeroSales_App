@@ -13,7 +13,7 @@ class UtilsServices {
     Fluttertoast.showToast(
       msg: msg,
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER, //Ficar no centro a mensagem
+      //gravity: ToastGravity.CENTER, //Ficar no centro a mensagem
       timeInSecForIosWeb: 1,
       backgroundColor: isError ? Colors.red : Colors.white,
       textColor: isError ? Colors.white : Colors.black,

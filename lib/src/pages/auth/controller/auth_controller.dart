@@ -23,6 +23,13 @@ class AuthController extends GetxController {
     pathApi = await utilsServices.getLocalData(key: StorageKeys.pathApi);
   }
 
+  //Valida o caminho da Api
+  Future<bool> validatePathApi({
+    required String pathApi,
+  }) async {
+    return await authRepository.validatePathApi(pathApi: pathApi);
+  }
+
   //Valido o Login na API
   Future<bool> validateLogin({
     required String seller,
