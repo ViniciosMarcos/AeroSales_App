@@ -76,7 +76,9 @@ class HomeTab extends StatelessWidget {
                 image: 'assets/app_images/icone_produtos.png',
                 icone: Icons.shopping_cart,
                 label: 'Produtos',
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(PagesRoutes.productScreen);
+                },
               ),
               //Tela de Clientes
 

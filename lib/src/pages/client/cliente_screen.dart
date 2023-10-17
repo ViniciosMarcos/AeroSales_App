@@ -152,16 +152,7 @@ class _ClientScreenState extends State<ClientScreen> {
                         child: FutureBuilder<List<Cliente>>(
                           future: clienteController.loadClient(clienteTexto),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              //Até carregar aparece um circulo carregando.
-                              return const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 20),
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            } else if (snapshot.hasError) {
+                            if (snapshot.hasError) {
                               //Se ocorrer erro, mostro em tela.
                               return Text('Ocorreu um erro: ${snapshot.error}');
                             } else if (snapshot.hasData) {
@@ -177,7 +168,6 @@ class _ClientScreenState extends State<ClientScreen> {
                                   final cliente = clientes[index];
                                   return CardCliente(
                                     cliente: cliente,
-                                    onTap: () {},
                                   );
                                 },
                               );

@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 
 class CardCliente extends StatelessWidget {
   final Cliente cliente;
-  final VoidCallback onTap;
 
   const CardCliente({
     super.key,
     required this.cliente,
-    required this.onTap,
   });
 
   @override
