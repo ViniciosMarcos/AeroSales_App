@@ -1,6 +1,6 @@
 import 'package:aerosales_app/src/models/client_model.dart';
 import 'package:aerosales_app/src/models/payment_terms_model.dart';
-import 'package:aerosales_app/src/models/product_model.dart';
+import 'package:aerosales_app/src/models/product_cart_model.dart';
 import 'package:aerosales_app/src/models/type_payment_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,7 +10,7 @@ part 'sales_model.g.dart';
 class Sales {
   int? codigo;
   Cliente? cliente;
-  List<Products>? produtos;
+  List<ProductsCart>? produtos;
   TypePayment? tipoPgto;
   PaymentTerms? condPgto;
 

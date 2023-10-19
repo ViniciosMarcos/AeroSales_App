@@ -1,5 +1,5 @@
 import 'package:aerosales_app/src/models/payment_terms_model.dart';
-import 'package:aerosales_app/src/models/product_model.dart';
+import 'package:aerosales_app/src/models/product_cart_model.dart';
 import 'package:aerosales_app/src/models/sales_model.dart';
 import 'package:aerosales_app/src/models/type_payment_model.dart';
 import 'package:aerosales_app/src/pages/sales/repository/sales_repostory.dart';
@@ -9,7 +9,7 @@ class SalesController extends GetxController {
   SalesRepository salesRepository = SalesRepository();
   Sales sales = Sales(produtos: []);
 
-  void addProductSales(Products produto) {
+  void addProductSales(ProductsCart produto) {
     if (sales.produtos != null) {
       sales.produtos!.add(produto);
       update();

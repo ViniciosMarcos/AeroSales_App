@@ -99,16 +99,6 @@ class _ClientScreenState extends State<ClientScreen> {
                     ),
                     TextFormField(
                       controller: _textController,
-                      onChanged: (value) {
-                        setState(() {
-                          //Conforme for digitando vou trazendo a lista de clientes,
-                          //passo o conteúdo do campo para a variavel e chamo a funcao
-                          clienteTexto = value;
-
-                          //Atribuo a varival para retornar os clientes
-                          _carregaDados = true;
-                        });
-                      },
                       decoration: InputDecoration(
                         hintText: 'Pesquisar...',
                         hintStyle: const TextStyle(

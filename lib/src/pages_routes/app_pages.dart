@@ -1,4 +1,4 @@
-import 'package:aerosales_app/src/pages/auth/sign_in_screen.dart';
+import 'package:aerosales_app/src/pages/auth/view/sign_in_screen.dart';
 import 'package:aerosales_app/src/pages/client/cliente_screen.dart';
 import 'package:aerosales_app/src/pages/home/home_tab.dart';
 import 'package:aerosales_app/src/pages/product/product_screen.dart';

@@ -21,6 +21,8 @@ class CustomTextField extends StatefulWidget {
   final List<TextInputFormatter>? formatacao;
   final String? value;
   final TextEditingController? textController;
+  final VoidCallback? onEditingComplete;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
@@ -30,6 +32,8 @@ class CustomTextField extends StatefulWidget {
     this.formatacao,
     this.value,
     this.textController,
+    this.validator,
+    this.onEditingComplete,
   });
 
   @override
@@ -68,6 +72,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             initialValue: widget.value,
             inputFormatters: formatCampo,
             controller: widget.textController,
+            validator: widget.validator,
+            onEditingComplete: widget.onEditingComplete,
             decoration: InputDecoration(
               isDense: true,
               prefixIcon: Icon(

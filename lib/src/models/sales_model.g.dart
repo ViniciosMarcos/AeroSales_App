@@ -12,7 +12,7 @@ Sales _$SalesFromJson(Map<String, dynamic> json) => Sales(
           ? null
           : Cliente.fromJson(json['cliente'] as Map<String, dynamic>),
       produtos: (json['produtos'] as List<dynamic>?)
-          ?.map((e) => Products.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ProductsCart.fromJson(e as Map<String, dynamic>))
           .toList(),
       condPgto: json['condPgto'] == null
           ? null

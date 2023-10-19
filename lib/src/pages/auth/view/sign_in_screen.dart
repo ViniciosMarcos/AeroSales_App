@@ -5,6 +5,7 @@ import 'package:aerosales_app/src/pages/commom_widgets/app_name_widget.dart';
 import 'package:aerosales_app/src/pages/commom_widgets/custom_text_field.dart';
 import 'package:aerosales_app/src/pages_routes/app_pages.dart';
 import 'package:aerosales_app/src/services/utils_services.dart';
+import 'package:aerosales_app/src/services/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController parametroController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthController authController = Get.find<AuthController>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -82,62 +84,78 @@ class _SignInScreenState extends State<SignInScreen> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      //Campo de Login
-                      CustomTextField(
-                        nomeCampo: 'Login',
-                        icone: Icons.person,
-                        textController: loginController,
-                      ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        //Campo de Login
+                        CustomTextField(
+                          nomeCampo: 'Login',
+                          icone: Icons.person,
+                          textController: loginController,
+                          validator: loginValidator,
+                        ),
 
-                      //Campo de senha
-                      CustomTextField(
-                        nomeCampo: 'Senha',
-                        icone: Icons.lock,
-                        senha: true,
-                        textController: passwordController,
-                      ),
-                      //Botao Entrar
-                      SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            utilsServices.saveLocalData(
-                              key: StorageKeys.seller,
-                              data: loginController.text,
-                            );
-                            final result = await authController.validateLogin(
-                              seller: loginController.text,
-                              password: passwordController.text,
-                            );
+                        //Campo de senha
+                        CustomTextField(
+                          nomeCampo: 'Senha',
+                          icone: Icons.lock,
+                          senha: true,
+                          textController: passwordController,
+                          validator: passwordValidator,
+                        ),
+                        //Botao Entrar
+                        SizedBox(
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (authController.pathApi!.isEmpty ||
+                                  authController.pathApi == null) {
+                                utilsServices.showToast(
+                                    msg: 'Caminho da API não configurado.',
+                                    isError: true);
+                                return;
+                              }
 
-                            if (result) {
-                              Get.offAllNamed(PagesRoutes.homeTab);
-                            } else {
-                              utilsServices.showToast(
-                                msg: 'Login ou senha inválido, verifique!',
-                                isError: true,
+                              utilsServices.saveLocalData(
+                                key: StorageKeys.seller,
+                                data: loginController.text,
                               );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              if (_formKey.currentState!.validate()) {
+                                final result =
+                                    await authController.validateLogin(
+                                  seller: loginController.text,
+                                  password: passwordController.text,
+                                );
+
+                                if (result) {
+                                  Get.offAllNamed(PagesRoutes.homeTab);
+                                } else {
+                                  utilsServices.showToast(
+                                    msg: 'Login ou senha inválido, verifique!',
+                                    isError: true,
+                                  );
+                                }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              elevation: 10,
                             ),
-                            elevation: 10,
-                          ),
-                          child: const Text(
-                            'Entrar',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                            child: const Text(
+                              'Entrar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               )

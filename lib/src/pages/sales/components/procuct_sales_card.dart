@@ -1,7 +1,9 @@
 import 'package:aerosales_app/src/configs/custom_colors.dart';
+import 'package:aerosales_app/src/models/product_cart_model.dart';
 import 'package:aerosales_app/src/models/product_model.dart';
 import 'package:aerosales_app/src/pages/sales/controller/sales_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CardProdutos extends StatefulWidget {
   final Products produto;
@@ -16,7 +18,9 @@ class CardProdutos extends StatefulWidget {
 }
 
 class _CardProdutosState extends State<CardProdutos> {
-  SalesController salesController = SalesController();
+  SalesController salesController = Get.find<SalesController>();
+  ProductsCart productCart = ProductsCart();
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,7 +28,10 @@ class _CardProdutosState extends State<CardProdutos> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            salesController.addProductSales(widget.produto);
+            productCart.product = widget.produto;
+            productCart.quantity = 1;
+            productCart.priceTotal = 10;
+            salesController.addProductSales(productCart);
           });
         },
         child: SizedBox(

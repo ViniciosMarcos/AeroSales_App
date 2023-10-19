@@ -13,7 +13,7 @@ class SalesData extends StatefulWidget {
 }
 
 class _SalesDataState extends State<SalesData> {
-  SalesController salesController = SalesController();
+  SalesController salesController = Get.find<SalesController>();
   String dropdownValueTipoPgto = '';
   int dropdownValueTipoPgtoItem = 0;
   String dropdownValueCondicaoPgto = '';
@@ -65,15 +65,29 @@ class _SalesDataState extends State<SalesData> {
                           ),
                         ),
                         Expanded(
-                          child: Text(
-                            salesController.sales.cliente == null
-                                ? ''
-                                : salesController.sales.cliente!.nome!,
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          child: Column(
+                            children: [
+                              Text(
+                                salesController.sales.cliente == null
+                                    ? 'Marcos Vinicios Saldanha dos Santos'
+                                    : salesController.sales.cliente!.nome!,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                salesController.sales.cliente == null
+                                    ? 'Fantasia Marcos Vinicios Saldanha dos Santos'
+                                    : salesController.sales.cliente!.fantasia!,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -115,38 +129,35 @@ class _SalesDataState extends State<SalesData> {
                             FutureBuilder<List<TypePayment>>(
                               future: salesController.loadTypePayment(),
                               builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const CircularProgressIndicator(); // Mostra um indicador de carregamento enquanto espera.
-                                } else if (snapshot.hasError) {
+                                if (snapshot.hasError) {
                                   return Text('Erro: ${snapshot.error}');
                                 } else if (!snapshot.hasData) {
                                   return const Text('Nenhum dado encontrado.');
                                 } else {
                                   List<TypePayment> tiposPagamento =
                                       snapshot.data!;
-                                  if (dropdownValueTipoPgto.isEmpty) {
-                                    dropdownValueTipoPgto =
-                                        tiposPagamento.first.id.toString();
+
+                                  final Map<String, TypePayment>
+                                      tipoPagamentoMap = {};
+                                  for (var tipo in tiposPagamento) {
+                                    tipoPagamentoMap[tipo.id.toString()] = tipo;
                                   }
 
                                   // Retorno o DropdownButton.
                                   return DropdownButton<String>(
-                                    value:
-                                        salesController.sales.tipoPgto == null
-                                            ? dropdownValueTipoPgto
-                                            : salesController
-                                                .sales.tipoPgto!.descricao,
-                                    items: tiposPagamento.map((tipo) {
-                                      dropdownValueTipoPgtoItem = tipo.id;
+                                    value: salesController.sales.tipoPgto?.id
+                                        .toString(),
+                                    items: tipoPagamentoMap.keys.map((value) {
                                       return DropdownMenuItem<String>(
-                                        value: tipo.id.toString(),
-                                        child: Text(tipo.descricao),
+                                        value: value,
+                                        child: Text(
+                                            tipoPagamentoMap[value]!.descricao),
                                       );
                                     }).toList(),
                                     onChanged: (String? newValue) {
                                       setState(() {
-                                        dropdownValueTipoPgto = newValue!;
+                                        salesController.sales.tipoPgto =
+                                            tipoPagamentoMap[newValue!];
                                       });
                                     },
                                   );
