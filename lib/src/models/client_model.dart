@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'client_model.g.dart';
+
+@JsonSerializable()
 class Cliente {
   int? codigo;
   String? nome;
@@ -52,4 +57,9 @@ class Cliente {
       return '${cgcFormatado.substring(0, 2)}.${cgcFormatado.substring(2, 5)}.${cgcFormatado.substring(5, 8)}/${cgcFormatado.substring(8, 12)}-${cgcFormatado.substring(12, 14)}';
     }
   }
+
+  factory Cliente.fromJson(Map<String, dynamic> json) =>
+      _$ClienteFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ClienteToJson(this);
 }

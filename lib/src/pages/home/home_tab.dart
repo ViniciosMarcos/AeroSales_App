@@ -61,7 +61,9 @@ class HomeTab extends StatelessWidget {
                 image: 'assets/app_images/icone_pedidos.png',
                 icone: Icons.list_alt_outlined,
                 label: 'Novo Pedido',
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(PagesRoutes.salesScreen);
+                },
               ),
 
               //Tela de Vendas

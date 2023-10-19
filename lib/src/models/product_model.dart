@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'product_model.g.dart';
+
+@JsonSerializable()
 class Products {
   String? codigo;
   String? descricao;
@@ -22,4 +27,9 @@ class Products {
     this.subGrupo,
     this.codBarras,
   });
+
+  factory Products.fromJson(Map<String, dynamic> json) =>
+      _$ProductsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductsToJson(this);
 }
