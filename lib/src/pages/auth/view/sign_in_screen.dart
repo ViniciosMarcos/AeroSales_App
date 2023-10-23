@@ -110,8 +110,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: () async {
-                              if (authController.pathApi!.isEmpty ||
-                                  authController.pathApi == null) {
+                              if (authController.pathApi == null) {
                                 utilsServices.showToast(
                                     msg: 'Caminho da API não configurado.',
                                     isError: true);
