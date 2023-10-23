@@ -51,7 +51,9 @@ class _ClientScreenState extends State<ClientScreen> {
           height: tamanhoTela.height,
           width: tamanhoTela.width,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

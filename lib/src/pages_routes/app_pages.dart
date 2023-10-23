@@ -1,7 +1,7 @@
 import 'package:aerosales_app/src/pages/auth/view/sign_in_screen.dart';
 import 'package:aerosales_app/src/pages/client/view/cliente_screen.dart';
 import 'package:aerosales_app/src/pages/home/home_tab.dart';
-import 'package:aerosales_app/src/pages/product/product_screen.dart';
+import 'package:aerosales_app/src/pages/product/view/product_screen.dart';
 import 'package:aerosales_app/src/pages/sales/view/sales_screen.dart';
 import 'package:aerosales_app/src/pages/splash/splash_screen.dart';
 import 'package:get/get.dart';

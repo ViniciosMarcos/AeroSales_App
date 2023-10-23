@@ -1,9 +1,8 @@
 import 'package:aerosales_app/src/models/product_model.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ProdutoController extends GetxController {
+class ProductRepository {
   //Lista todos os produtos
   Future<List<Products>> consultarProdutos(String descricao) async {
     if (descricao == '') {

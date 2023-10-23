@@ -1,5 +1,3 @@
-import 'package:aerosales_app/src/configs/custom_colors.dart';
-import 'package:aerosales_app/src/pages/commom_widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
